@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
     List<Horario> h =
     p.isNotEmpty && m.isNotEmpty ? await DBHorario.mostrar() : [];
     List<ProfesorHorarioMateria> r =
-    h.isNotEmpty ? await DBHorario.mostrarConRelacion() : [];
+    h.isNotEmpty && m.isNotEmpty ? await DBHorario.mostrarConRelacion() : [];
     List<Asistencia> a = r.isNotEmpty ? await DBAsistencia.mostrar() : [];
     List<AsistenciaProfesor> ap =
     a.isNotEmpty ? await DBAsistencia.mostrarConRelacion() : [];
@@ -602,24 +602,18 @@ class _MyAppState extends State<MyApp> {
           'CLASES REGISTRADAS',
           style: TextStyle(fontSize: 18, color: Colors.white),
         ),
+        SizedBox(height: 20,),
         Expanded(
             child: ListView.builder(
-                itemCount: listaAsistenciaProfesor.length,
+                itemCount: listaHorarioRelacion.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      child: Text(
-                          listaAsistenciaProfesor[index].idAsistenciaProfesor
-                              .toString()),
-                    ),
                     title: Text(
-                        listaAsistenciaProfesor[index].nombre.toString(),
-                        style: TextStyle(color: Colors.white)),
+                        listaHorarioRelacion[index].nombreProfesor.toString(),
+                        style: TextStyle(color: Colors.white, fontSize: 20), textAlign: TextAlign.center,),
                     subtitle: Text(
-                        '${listaAsistenciaProfesor[index]
-                            .nmat}  -  ${listaAsistenciaProfesor[index].hora}',
-                        style: TextStyle(color: Colors.white)),
+                        '${listaHorarioRelacion[index].nombreMateria} - ${listaHorarioRelacion[index].hora}',
+                        style: TextStyle(color: Colors.white,), textAlign: TextAlign.center,),
                   );
                 })),
       ],

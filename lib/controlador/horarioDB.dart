@@ -41,7 +41,8 @@ class DBHorario {
           'SELECT * FROM HORARIO, PROFESOR, MATERIA WHERE HORARIO.NPROFESOR = PROFESOR.NPROFESOR AND HORARIO.NMAT = MATERIA.NMAT');
       return List.generate(resultado.length, (index) {
         return ProfesorHorarioMateria(
-            nhorario: resultado[index]['NHORARIO'],
+          nhorario: resultado[index]['NHORARIO'],
+            hora: resultado[index]['HORA'],
             nombreProfesor: resultado[index]['NOMBRE'],
             nombreMateria: resultado[index]['NMAT']);
       });
